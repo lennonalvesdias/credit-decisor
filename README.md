@@ -2,11 +2,11 @@
 
 ## 💻 Aplicação
 
-Projeto para decisão de crédito.
+Projeto para decisão de crédito. [`decisor.ipynb`](/client/decisor.ipynb).
 
 * Modelo de *Machine Learning* para predição de *score*.
-* APIs para exposição da predição do modelo.
-* Cliente *(Jupyter Notebook)* realizando análise facial e consultado o score de crédito.
+* APIs para exposição do modelo de predição.
+* Cliente *(Jupyter Notebook)* com análise facial e consulta do score de crédito.
 
 ## 🚀 Tecnologias
 
