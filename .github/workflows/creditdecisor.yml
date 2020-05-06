@@ -47,5 +47,5 @@ jobs:
         username: ${{ secrets.HOST_USERNAME }}
         password: ${{ secrets.HOST_PASSWORD }}
         script: |
-          chmod +x ./creditdecisor/restart_models.sh
-          ./creditdecisor/restart_models.sh
+          chmod +x ./creditdecisor/restart_server.sh
+          ./creditdecisor/restart_server.sh

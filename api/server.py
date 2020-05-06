@@ -21,7 +21,7 @@ app.json_encoder = NpEncoder
 @app.route("/", methods=['GET', 'POST'])
 def call_home(request = request):
     print(request.values)
-    return "SERVER IS RUNNING!"
+    return "SERVER IS RUNNING"
 
 @app.route("/modelo01", methods=['POST'])
 def call_modelo01(request = request):
@@ -65,5 +65,5 @@ def call_modelo02(request = request):
 if __name__ == '__main__':
     modelo01 = joblib.load( 'model/modelo01.joblib')
     modelo02 = joblib.load( 'model/modelo02.joblib')
-    app.run(port=8080) # app.run(port=8080, host='0.0.0.0')
+    app.run(port=5000) # app.run(port=8080, host='0.0.0.0')
     # pass
