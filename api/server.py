@@ -64,6 +64,6 @@ def call_modelo02(request = request):
 
 modelo01 = joblib.load( 'model/modelo01.joblib')
 modelo02 = joblib.load( 'model/modelo02.joblib')
-app.run(port=5000) # app.run(port=5000, host='0.0.0.0')
-# teste run 3
+app.run(port=5000, host='0.0.0.0') # app.run(port=5000, host='0.0.0.0')
+# teste run 4
 # pass
