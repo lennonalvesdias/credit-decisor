@@ -1,9 +1,11 @@
 import os
+import io
 import cv2
 from dotenv import load_dotenv
 from PIL import Image, ImageDraw
 import numpy as np
 from matplotlib import pyplot as plt
+import dlib
 
 load_dotenv()
 
@@ -57,9 +59,13 @@ def print_fiducial_points(image, face):
     plt.axis('off')
     plt.title('Pontos Fiduciais')
 
-def facial_recognition(face_client, image):
-    recognition = face_client.face.detect_with_stream(image=image, return_face_landmarks=True, return_face_attributes=["age", "gender"])
-    face = recognition[0]
-    print_fiducial_points(image, face)
-    face_attributes = face.face_attributes
-    return face_attributes.age, face_attributes.gender
+def draw_fiducial_points(image, points):
+    image = image.copy()
+    if points is None:
+        return image
+    for point in points:
+        for idx, point in enumerate(point):
+            center = (point[0, 0], point[0, 1])
+            cv2.putText(image, str(idx), center, fontFace=cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, fontScale=0.4, color=(0, 0, 255))
+            cv2.circle(image, center, 3, color=(0, 255, 255))
+    return image
