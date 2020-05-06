@@ -41,7 +41,10 @@ def call_modelo01(request = request):
     prediction = modelo01.predict(x)
     predict_proba = modelo01.predict_proba(x)
 
-    return str({'prediction': list(prediction), 'proba': list(predict_proba)})
+    return {
+        'prediction': list(prediction),
+        'proba': list(predict_proba)
+    }
 
 @app.route("/modelo02", methods=['POST'])
 def call_modelo02(request = request):
@@ -60,7 +63,9 @@ def call_modelo02(request = request):
 
     prediction = modelo02.predict(x)
 
-    return str({'prediction': list(prediction)})
+    return {
+        'prediction': list(prediction)
+    }
 
 if __name__ == '__main__':
     modelo01 = joblib.load( 'model/modelo01.joblib')
