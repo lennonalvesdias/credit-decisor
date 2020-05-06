@@ -1,0 +1,46 @@
+name: Credit Decisor Server
+
+on:
+  push:
+    paths:
+    - 'api/**'
+    branches:
+    - release/*
+    - hotfix/*
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    name: deploy server
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: Docker Login
+      uses: Azure/docker-login@v1
+      with:
+        login-server: registry.lennon.cloud
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - name: Docker Build
+      run: |
+        docker build . -t registry.lennon.cloud/creditdecisor/server:${{ github.sha }}
+        docker tag registry.lennon.cloud/creditdecisor/server:${{ github.sha }} registry.lennon.cloud/creditdecisor/server:latest
+        docker push registry.lennon.cloud/creditdecisor/server:${{ github.sha }}
+        docker push registry.lennon.cloud/creditdecisor/server:latest
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST_ADDRESS }}
+        username: ${{ secrets.HOST_USERNAME }}
+        password: ${{ secrets.HOST_PASSWORD }}
+        script: |
+          chmod +x ./creditdecisor/restart_models.sh
+          ./creditdecisor/restart_models.sh

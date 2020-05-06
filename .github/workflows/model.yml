@@ -1,0 +1,29 @@
+name: Credit Decisor Server
+
+on:
+  push:
+    paths:
+    - 'model/**'
+    branches:
+    - release/*
+    - hotfix/*
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    name: deploy server
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: Install Requirements
+      run: python -m pip install -r requirements.txt
+    - name: Training New Model
+      run: python model/training.py
