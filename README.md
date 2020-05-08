@@ -21,9 +21,9 @@ Projeto para decisão de crédito. [`decisor.ipynb`](/client/decisor.ipynb).
 
 | arquivo | descrição |
 |---|---|
-| [`api`](/api) | Arquivos da API para consumo externo do modelo |
-| [`client`](/client) | Arquivos de criação do modelo de *machine learning* |
-| [`model`](/model) | Arquivos de criação do modelo de *machine learning* |
+| [`api`](/api) | Arquivos para criação de uma API para expor o modelo |
+| [`client`](/client) | Arquivos finais para consumo das APIs e decisão do crédito |
+| [`model`](/model) | Arquivos de criação e treinamento do modelo de *machine learning* |
 
 ## 🔗 Instalações
 
