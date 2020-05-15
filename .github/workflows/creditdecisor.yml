@@ -3,6 +3,7 @@ name: Credit Decisor Server
 on:
   push:
     paths:
+    - '.github/**'
     - 'model/**'
     - 'api/**'
     branches:

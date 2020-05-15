@@ -21,6 +21,24 @@ app = Flask(__name__)
 app.json_encoder = NpEncoder
 
 
+def get_predict(request, model):
+    print(request.values)
+    json_ = request.json
+    campos = pd.DataFrame(json_)
+
+    if campos.shape[0] == 0:
+        return "Dados do usuário estão incorretos.", 400
+
+    for col in model.independentcols:
+        if col not in campos.columns:
+            campos[col] = 0
+    x = campos[model.independentcols]
+
+    prediction = model.predict(x)
+    # predict_proba = model.predict_proba(x)
+    return prediction
+
+
 @app.route("/", methods=['GET', 'POST'])
 def call_home(request=request):
     print(request.values)
@@ -115,21 +133,3 @@ if __name__ == '__main__':
         'model/model_2_xgboost_classifier.joblib')
 
     app.run(port=5000, host='0.0.0.0')
-
-
-def get_predict(request, model):
-    print(request.values)
-    json_ = request.json
-    campos = pd.DataFrame(json_)
-
-    if campos.shape[0] == 0:
-        return "Dados do usuário estão incorretos.", 400
-
-    for col in model.independentcols:
-        if col not in campos.columns:
-            campos[col] = 0
-    x = campos[model.independentcols]
-
-    prediction = model.predict(x)
-    # predict_proba = model.predict_proba(x)
-    return prediction
